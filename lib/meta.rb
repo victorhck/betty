@@ -2,18 +2,19 @@ module Meta
   def self.interpret(command)
     responses = []
     
-    if command.match(/^(what\s+)?version(\s+are\s+you)?$/)
+    if command.match(/^(que\s+)?version(\s+eres)?$/) || command.match(/^(qué\s+)?versión(\s+eres)?$/) || command.match(/^(que\s+)?versión(\s+eres)?$/)
       responses << {
         :say => $VERSION,
-        :explanation => "Gets Betty's version."
+        :explanation => "Muestra la versión de Betty."
       }
     end
     
-    if command.match(/^whats?\s+(?:is\s+)?your\s+(website|url|github|repo)(\s+again\?)?$/) ||
-       command.match(/^(website|url)$/)
+    if command.match(/^cual\s+es\s+la\s+direccion\s+de\s+tu\s+(repositorio|url|github|repo)$/) ||
+       command.match(/^(website|url|dirección|direccion)$/) ||
+       command.match(/^cual\s+es\s+la\s+dirección\s+de\s+tu\s+(repositorio|url|github|repo)$/)
       responses << {
         :say => $URL,
-        :explanation => "Gets Betty's website."
+        :explanation => "Muestra la dirección web de Betty."
       }
     end
     
@@ -24,8 +25,8 @@ module Meta
     commands = []
     commands << {
       :category => "Meta",
-      :usage => ["- betty what version are you (or just betty version)",
-      "- betty whats your github again"]
+      :usage => ["- betty que versión eres",
+      "- betty cual es la dirección de tu repositorio"]
     }
     commands
   end

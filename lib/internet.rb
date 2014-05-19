@@ -1,6 +1,6 @@
 module Internet
   def self.download(command)
-    match = command.match(/^download\s+([^\s]{3,})(?:\s+to\s+(.+))?$/i)
+    match = command.match(/^descarga\s+([^\s]{3,})(?:\s+a\s+(.+))?$/i)
     
     if match
       where = match[1].strip
@@ -9,13 +9,13 @@ module Internet
       
       {
         :command => "curl#{ output ? ' -o ' + output : ''} #{ where }".strip,
-        :explanation => "Downloads the contents of the URL#{ output ? ' to ' + output : '' }."
+        :explanation => "Descarga el contenido de una URL a#{ output ? ' to ' + output : '' }."
       }
     end
   end
 
   def self.uncompress(command)
-    match = command.match(/^(?:unzip|unarchive|untar|uncompress|expand)\s+([^\s]+)(?:\s+(?:to\s+)?(.+))?$/i)
+    match = command.match(/^(?:descomprime|extrae)\s+([^\s]+)(?:\s+(?:a\s+)?(.+))?$/i)
     
     if match
       what_file = match[1].strip
@@ -27,20 +27,20 @@ module Internet
       
       {
         :command => "#{ in_same_directory ? '' : 'mkdir ' + where + ' && ' } tar -zxvf #{ what_file } #{ in_same_directory ? '' : '-C ' + where }".strip,
-        :explanation => "Uncompresses the contents of the file #{ what_file }, outputting the contents to #{ in_same_directory ? 'this directory' : where }."
+        :explanation => "Descomprime el contenido de un archivo #{ what_file }, sacando el contenido en el mismo directorio #{ in_same_directory ? 'this directory' : where }."
       }
     end
   end
 
   def self.compress(command)
-    match = command.match(/^(?:zip|archive|tar gzip|gzip tar|compress)\s+([^\s]+)(\s+(?:directory|dir|folder|path))?$/i)
+    match = command.match(/^(?:archiva|comprime)\s+([^\s]+)(\s+(?:directorio|carpeta|ruta))?$/i)
 
     if match
       what_file = match[1].strip
 
       {
         :command => "cd #{ what_file }; tar -czvf #{ what_file }.tar.gz *",
-        :explanation => "Compress the contents of #{ what_file } directory, outputting the compressed file to parent directory"
+        :explanation => "Comprime el contenido de #{ what_file } directorio, sacando el resultado en un archivo en el mismo directorio"
       }
     end
   end
@@ -65,11 +65,11 @@ module Internet
     commands << {
       :category => "Internet",
       :description => 'Download files from \033[34mInternet\033[0m, uncompress/compress them',
-      :usage => ["- betty download http://www.mysite.com/something.tar.gz to something.tar.gz",
-      "- betty uncompress something.tar.gz",
-      "- betty unarchive something.tar.gz to somedir",
-      "(You can use unzip, unarchive, untar, uncompress, and expand interchangeably.)",
-      "- betty compress /path/to/dir"]
+      :usage => ["- betty descarga http://www.miweb.com/archivo.tar.gz a ~/Ruta/archivo.tar.gz",
+      "- betty descomprime archivo.tar.gz",
+      "- betty extrae archivo.tar.gz a tu_directorio",
+      "(también puedes usar la palabra estrae.)",
+      "- betty comprime /ruta/a/directorio"]
     }
     commands
   end

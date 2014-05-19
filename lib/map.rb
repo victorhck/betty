@@ -2,7 +2,7 @@ module Map
   def self.interpret(command)
     responses = []
 
-    if command.match(/^(?:show\s+)?(?:me\s+)?(?:a\s+)?map\s+(?:of\s+)?(.+)$/)
+    if command.match(/^(?:muestrame\s+)?(?:me\s+)?(?:un\s+)?mapa\s+(?:de\s+)?(.+)$/)
       search_term = $1.gsub(' ', '%20')
       command = ""
 
@@ -17,7 +17,7 @@ module Map
 
       responses << {
         :command => "#{command} https://www.google.com/maps/search/#{ search_term }",
-        :explanation => "Opens a browser with Google Maps searching for '#{ search_term }'."
+        :explanation => "Abre el navegador con Google Maps buscando '#{ search_term }'."
       }
     end
 
@@ -27,9 +27,9 @@ module Map
   def self.help
     commands = []
     commands << {
-      :category => "Map",
+      :category => "Mapa",
       :description => 'Pull out \033[34mMap\033[0ms from Google',
-      :usage => ["- betty show me a map of mountain view"]
+      :usage => ["- betty muestrame un mapa de España"]
     }
     commands
   end

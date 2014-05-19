@@ -18,7 +18,7 @@ module OS
   def self.interpret(command)
     responses = []
 
-    if command.match(/^(?:show|me|whats|what|is|my|\s)*OS(?:\s|name|do i have|is used|.)*$/i)
+    if command.match(/^(?:dime|muestrame|cual|es|mi|\s)*SO(?:\s|name|do i have|is used|.)*$/i)
       os = platform_name
 
       responses << {

@@ -2,38 +2,38 @@ module Fun
   def self.interpret(command)
     responses = []
     
-    if command.match(/^what\'?s?(\s+is)?\s+the\s+meaning\s+of\s+life\??$/i)
+    if command.match(/^cual\s?(\s+es)?\s+el\s+significado\s+de\s+la\s+vida\??$/i) || command.match(/^cual\s?(\s+es)?\s+el\s+sentido\s+de\s+la\s+vida\??$/i)
       responses << {
         :say => "42."
       }
     end
     
-    if command.match(/^make\s+me\s+a\s+(.+)$/i)
+    if command.match(/^hazme\s+un\s+(.+)$/i) || command.match(/^hazme\s+una\s+(.+)$/i)
       thing = "#{ $1 }"
       responses << {
         :call => lambda { self.make_me_a(thing) }
       }
     end
     
-    if command.match(/^sudo\s+make\s+me\s+a\s+(.+)$/i)
+    if command.match(/^sudo\s+hazme\s+un\s+(.+)$/i) || command.match(/^sudo\s+hazme\s+una\s+(.+)$/i)
       responses << {
-        :say => "I think you meant to place sudo at the start of the command."
+        :say => "Creo que sería mejor si pones el sudo al inicio del comando."
       }
     end
     
-    if command.match(/^what\'?s?(\s+is)?\s+my\s(mother\s+fucking?)\s+name\??$/i)
+    if command.match(/^cual\s?(\s+es)?\s+mi\s+nombre\??$/i)
       responses << {
         :say => "Snoop Doggy Dogg."
       }
     end
     
-    if command.match(/^you\'?(re)?\s+(are\s+)?(cool|awesome|amazing|fun(ny)?|rock\s+my\s+world|rule)$/i)
+    if command.match(/^eres\s+?(genial|asombrosa|fascinante|divertida|la\s+mejor|rule)$/i)
       responses << {
-        :say => "You betcha."
+        :say => "Puedes apostar a que sí!!"
       }
     end
     
-    if command.match(/^go\s+crazy$/i) || command.match(/^trip\s+(out|acid)$/i)
+    if command.match(/^vuelvete\s+loca$/i) || command.match(/^trip\s+(out|acid)$/i)
       responses << {
         :call => lambda { self.go_crazy },
         :say => "Woah."
@@ -45,9 +45,9 @@ module Fun
   
   def self.make_me_a(thing)
     if Process.uid != 0
-      puts "Make your own damn #{thing}."
+      puts "Haztelo tu mismo el maldito  #{thing}."
     else
-      puts "Ha, like sudo has any effect on me!"
+      puts "Ja, sudo no tiene ningún efecto sobre mi!"
     end
   end
   
@@ -70,9 +70,8 @@ module Fun
   def self.help
     commands = []
     commands << {
-      :category => "Fun",
-      :usage => ["- betty go crazy",
-      "- betty whats the meaning of life",
+      :category => "Diversión",
+      :usage => ["- betty cual es el significado de la vida",
       "...and more that are left for you to discover!"]
     }
     commands
