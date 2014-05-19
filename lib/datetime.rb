@@ -2,32 +2,32 @@ module Datetime
   def self.interpret(command)
     responses = []
     
-    if command.match(/^what\s+time\sis\sit\??$/i) || command.match(/^what\s+is\sthe\stime$/i) || command.match(/^what\s+is\sthe\stime\snow\??$/i)
+    if command.match(/^que\s+hora\ses\s??$/i) || command.match(/^tienes\s+hora\stime$/i) || command.match(/^dime\s+la\s+hora\??$/i)
       responses << {
         :command => "date +\"%T\"",
-        :explanation => "Gets the current time."
+        :explanation => "Muestra la hora actual."
       }
     end
 
-    if command.match(/^what\s+is\s+((today'?s?|the)\s+)?date\??$/i)
+    if command.match(/^que\s+dia\s+es\s+hoy\s??$/i) || command.match(/^que\s+día\s+es\s+hoy\s??$/i)
       responses << {
         :command => "date +\"%m-%d-%y\"",
-        :explanation => "Gets the current date."
+        :explanation => "Muestra la fecha actual."
       }
     end
 
-    if command.match(/^what\s+month\sis\sit\??$/i)
+    if command.match(/^que\s+mes\ses??$/i) || command.match(/^en\s+que\s+mes\s+estamos\s?$/i)
       responses << {
         :command => "date +%B",
-        :explanation => "Gets the current month."
+        :explanation => "Muestra el mes actual"
       }
     end
 
-    if command.match(/^what\s+day\s+(of\s+the\s+week\s+)?is\s+it\??$/i) ||
-       command.match(/^what\'?s?\s+today$/)
+    if command.match(/^que\s+dia\s+de\s+la\s+semana\s+es\??$/i) ||
+       command.match(/^que\s+es\s+hoy$/)
       responses << {
         :command => "date +\"%A\"",
-        :explanation => "Gets the day of the week."
+        :explanation => "Muestra el día de la semana actual"
       }
     end
 
@@ -37,13 +37,13 @@ module Datetime
   def self.help
     commands = []
     commands << {
-      :category => "Datetime",
+      :category => "Fechahora",
       :description => 'Show information about \033[34mDatetime\033[0m',
-      :usage => ["- betty what time is it",
-      "- betty what is todays date",
-      "- betty what month is it",
-      "- betty whats today",
-      "- betty what is the time now"]
+      :usage => ["- betty que hora es",
+      "- betty que dia es hoy",
+      "- betty que mes es",
+      "- betty que es hoy",
+      "- betty tienes hora"]
     }
     commands
   end

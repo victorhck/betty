@@ -2,7 +2,8 @@ module Find
   def self.interpret(command)
     responses = []
 
-    match = command.match(/^find\s+(?:me\s+)?(?:all\s+)?(\S+\s+)?files(?:\s+in\s+(\S+))?(?:\s+that\s+contain\s+(.+))?$/i)
+    match = command.match(/^encuentra\s+(?:todos\s+)?(\S+\s+)?los\s+archivos(?:\s+en\s+(\S+))?(?:\s+que\s+contengan\s+(.+))?$/i)
+    #|| match = command.match(/^encuentra\s+todos\s+los\s+(?:archivos\s+)?(\S+)?en\s+(\S+)(?:\s+que\s+contengan\s+(.+))?$/i)
 
     if match
       directory = match[2] ? match[2].strip : "."
@@ -43,7 +44,8 @@ module Find
     commands << {
       :category => "Find",
       :description => '\033[34mFind\033[0m files',
-      :usage => ["- betty find me all files that contain california",
+      :usage => ["- betty encuentra todos los archivos que contengan california",
+      "- betty encuentra todos los archivos en ~/Mi_ruta/ que contengan california",
       "- betty find all rb files in ./lib/",
       "- betty find all txt files"]
     }
