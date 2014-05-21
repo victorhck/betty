@@ -1,9 +1,9 @@
 module Process
   
   def self.examples
-    [ "list of all processes",
-      "processes by user root",
-      "show me my processes matching log" ]
+    [ "listado de todos los procesos",
+      "procesos del usuario root",
+      "muestrame mis procesos" ]
   end
   
   def self.test
@@ -26,14 +26,14 @@ module Process
     responses = []
     
     process_pattern=%r{
-      (show|find|give|me|a|list|of|those|\s)*
-      (?<all>all\s)?
-      (?<my>my\s)?
+      (muestra|muestrame|encuentra|dame|da|una|lista|de|esos|\s)*
+      (?<all>todos\s)?
+      (?<my>mis\s)?
       PROCESS(es)?
-      (with|which|that|\s)*
-      (for|process|\s)* (id\s(?<process_id>[0-9]+))?
-      (for|belonging|belong|to|by|\s)* (user\s(?<user_id>\w+))?
-      ((like|matching|with|pattern|containing|that|which|contain|\s)+ (?<pattern>\w+))?
+      (con|cuales|que|\s)*
+      (para|procesos|\s)* (id\s(?<process_id>[0-9]+))?
+      (para|pertenezcan|sean|de|a|\s)* (usuario\s(?<user_id>\w+))?
+      ((como|matching|con|que|pattern|contengan|that|which|contain|\s)+ (?<pattern>\w+))?
     }imx
     
     # (?# todo <kill>kill\s)

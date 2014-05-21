@@ -1,6 +1,6 @@
 module Permissions
   def self.change_owner(command)
-    match = command.match(/^(?:make|give)\s+(me|.+)\s+(?:permissions?|ownership|the\s+owner)\s+(?:(?:of|to|for)\s+)?(.+)$/i)
+    match = command.match(/^(?:da|dame)\s+(me|.+)\s+(?:permisos?|propietario|the\s+owner)\s+(?:(?:de|para|for)\s+)?(.+)$/i)
     if match
       is_me = match[1].downcase == 'me'
       who = is_me ? '`whoami`' : match[1]
@@ -9,7 +9,7 @@ module Permissions
       
       {
         :command => "sudo chown #{ is_this_directory ? '-R ' : '' }#{ who } #{ is_this_directory ? '.' : what }",
-        :explanation => "Makes #{ is_me ? 'you' : who } the owner of #{ is_this_directory ? 'all the files in the current directory, including subdirectories' : what }."
+        :explanation => "Makes #{ is_me ? 'you' : who } the owner of #{ is_this_directory ? 'todos los ficheros del directorio actual, incluyendo subdirectorios' : what }."
       }
     end
   end
@@ -26,10 +26,10 @@ module Permissions
   def self.help
     commands = []
     commands << {
-      :category => "Permissions",
+      :category => "Permisos",
       :description => 'Manage file \033[34mPermissions\033[0m',
-      :usage => ["- betty give me permission to this directory",
-      "- betty give anotheruser ownership of myfile.txt"]
+      :usage => ["- betty dame permisos a este directory",
+      "- betty da otrousuario permisos de miarchivo.txt"]
     }
     commands
   end

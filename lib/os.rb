@@ -18,12 +18,12 @@ module OS
   def self.interpret(command)
     responses = []
 
-    if command.match(/^(?:dime|muestrame|cual|es|mi|\s)*SO(?:\s|name|do i have|is used|.)*$/i)
+    if command.match(/^(?:dime|muestrame\s)+|cual\+es\s+mi\s*SO*$/i)
       os = platform_name
 
       responses << {
         :command => "echo '#{os}'",
-        :explanation => "Show what OS is used."
+        :explanation => "Muestra el Sistema Operativo que uso"
       }
     end
 
@@ -33,9 +33,9 @@ module OS
   def self.help
     commands = []
     commands << {
-      :category => "OS",
+      :category => "SO",
       :description => 'Show \033[34mOS\033[0m name',
-      :usage => ["- betty show what OS is used"]
+      :usage => ["- betty dime cual es mi SO."]
     }
     commands
   end

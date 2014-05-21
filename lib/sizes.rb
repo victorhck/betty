@@ -35,15 +35,15 @@ module Sizes
 
   def self.size_stuff(command)
     @command_string = command
-    match = command.match(/^show\s+(?:size|disk|usage)\s+for\s+(.+?)$/i) || command.match(/^what[^\s]*\s+(?:the|)\s*(?:size|space)\s+(?:for|in|of)\s+(.+?)$/i)
+    match = command.match(/^show\s+(?:size|disk|usage)\s+for\s+(.+?)$/i) || command.match(/^cual[^\s]*\s+(?:es|)\s*(?:el tamaño|espacio)\s+(?:de|para|of)\s+(.+?)$/i)
     
     if match
       where = match[1].strip
-      is_this_directory = where == '.' || where.downcase.match(/^(this\s+)?(?:dir(?:ectory)|folder|path)?$/)
+      is_this_directory = where == '.' || where.downcase.match(/^((este|esta)\s+)?(?:directorio|carpeta|ruta)?$/)
       
       {
         :call => lambda {self.show_sizes(is_this_directory ? '.' : where )},
-        :explanation => "Shows the size of files in #{ is_this_directory ? 'all the files in the current directory, including subdirectories' : where }."
+        :explanation => "Shows the size of files in #{ is_this_directory ? 'todos los archivo del directorio actual, incluyendo subdirectorios' : where }."
       }
     end
   end
@@ -62,9 +62,9 @@ module Sizes
     commands << {
       :category => "Sizes",
       :description => 'Find file \033[34mSizes\033[0m',
-      :usage => ["- betty show size for file myfile.txt",
-      "- betty whats the size of ../this/folder",
-      "- betty whats the size of this folder"]
+      :usage => ["- betty cual es el tamaño de mi_archivo.txt",
+      "- betty cual es el tamaño de ../ruta/mi_carpeta",
+      "- betty cual es el tamaño para este directorio"]
     }
     commands
   end
